@@ -158,11 +158,19 @@ class PasswordManager(ctk.CTk):
             messagebox.showinfo("Backup Exported", f"Saved to:\n{backup_path}")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to export backup:\n{e}")
+import os, sys
+
+def resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
 
 if __name__ == "__main__":
     ctk.set_appearance_mode("Dark")
-    theme_path = os.path.join(os.path.dirname(__file__), "themes", "blue.json")
+    theme_path = resource_path("customtkinter/assets/themes/blue.json")
     customtkinter.set_default_color_theme(theme_path)
+
 
     app = PasswordManager()
     app.mainloop()
