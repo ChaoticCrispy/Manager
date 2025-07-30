@@ -161,6 +161,8 @@ class PasswordManager(ctk.CTk):
 
 if __name__ == "__main__":
     ctk.set_appearance_mode("Dark")
-    customtkinter.set_default_color_theme("themes/blue.json")
+    theme_path = os.path.join(os.path.dirname(__file__), "themes", "blue.json")
+    customtkinter.set_default_color_theme(theme_path)
+
     app = PasswordManager()
     app.mainloop()
