@@ -46,9 +46,7 @@ def download_and_run():
         spec.loader.exec_module(vault_module)
 
     except Exception as e:
-        print(f"[ERROR] Failed to load vault from GitHub:\n{e}")
         pass
-        sys.exit(1)
 
 if __name__ == "__main__":
     download_and_run()
