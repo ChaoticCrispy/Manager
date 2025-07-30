@@ -6,10 +6,30 @@ from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
 from cryptography.fernet import Fernet
 from cryptography.hazmat.backends import default_backend
+import urllib.request
+import os, sys
 
 VAULT_FILE = "vault.crispy"
 HEADER = b"CRISPY1"
 
+
+def resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
+def ensure_theme():
+    local_theme_path = resource_path("customtkinter/assets/themes/blue.json")
+    os.makedirs(os.path.dirname(local_theme_path), exist_ok=True)
+    if not os.path.exists(local_theme_path):
+        try:
+            print("Downloading missing theme...")
+            urllib.request.urlretrieve(
+                "https://raw.githubusercontent.com/ChaoticCrispy/Manager/main/themes/blue.json",
+                local_theme_path
+            )
+        except Exception as e:
+            print("Failed to download theme:", e)
 def derive_key(password: str, salt: bytes) -> bytes:
     kdf = PBKDF2HMAC(
         algorithm=hashes.SHA256(),
@@ -19,6 +39,10 @@ def derive_key(password: str, salt: bytes) -> bytes:
         backend=default_backend()
     )
     return base64.urlsafe_b64encode(kdf.derive(password.encode()))
+
+ensure_theme()
+ctk.set_appearance_mode("Dark")
+ctk.set_default_color_theme(resource_path("customtkinter/assets/themes/blue.json"))
 
 def load_vault(password: str):
     if not os.path.exists(VAULT_FILE):
@@ -166,10 +190,7 @@ def resource_path(relative_path):
     return os.path.join(os.path.abspath("."), relative_path)
 
 
-if __name__ == "__main__":
-    ctk.set_appearance_mode("Dark")
-    theme_path = resource_path("customtkinter/assets/themes/blue.json")
-    customtkinter.set_default_color_theme(theme_path)
+
 
 
     app = PasswordManager()
