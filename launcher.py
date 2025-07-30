@@ -47,7 +47,7 @@ def download_and_run():
 
     except Exception as e:
         print(f"[ERROR] Failed to load vault from GitHub:\n{e}")
-        input("Press Enter to exit.")
+        pass
         sys.exit(1)
 
 if __name__ == "__main__":
