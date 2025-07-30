@@ -23,7 +23,7 @@ def download_and_run():
         sys.exit(1)
     finally:
         try:
-            os.remove(VAULT_SCRIPT)  # Optional: auto delete after running
+            os.remove(VAULT_SCRIPT) 
         except Exception:
             pass
 
