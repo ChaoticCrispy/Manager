@@ -2,6 +2,9 @@ import urllib.request
 import tempfile
 import importlib.util
 import os
+os.environ["CTK_FORCE_FONT_RENDERING"] = "circle_shapes"
+
+import customtkinter as ctk
 import sys
 import zipfile
 import subprocess
