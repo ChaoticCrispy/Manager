@@ -41,8 +41,6 @@ def derive_key(password: str, salt: bytes) -> bytes:
     return base64.urlsafe_b64encode(kdf.derive(password.encode()))
 
 ensure_theme()
-ctk.set_appearance_mode("Dark")
-ctk.set_default_color_theme(resource_path("customtkinter/assets/themes/blue.json"))
 
 def load_vault(password: str):
     if not os.path.exists(VAULT_FILE):
@@ -192,6 +190,15 @@ def resource_path(relative_path):
 
 
 
+if __name__ == "__main__":
+    ctk.set_appearance_mode("Dark")
+    
+    try:
+        theme_path = resource_path("customtkinter/assets/themes/blue.json")
+        ctk.set_default_color_theme(theme_path)
+    except Exception as e:
+        print(f"[WARNING] Failed to load custom theme: {e}")
+    ctk.set_default_color_theme(theme_path) 
 
     app = PasswordManager()
     app.mainloop()
