@@ -53,7 +53,7 @@ class VaultLoginScreen(ctk.CTkFrame):
         super().__init__(master)
         self.on_unlock = on_unlock
 
-        ctk.CTkLabel(self, text="🔐 Enter your encryption key", font=ctk.CTkFont(size=18)).pack(pady=(60, 10))
+        ctk.CTkLabel(self, text="Enter your encryption key", font=ctk.CTkFont(size=18)).pack(pady=(60, 10))
         self.entry = ctk.CTkEntry(self, show="*", width=280, placeholder_text="Master Key")
         self.entry.pack(pady=10)
         self.entry.focus()
