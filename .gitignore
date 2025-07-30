@@ -1,0 +1,7 @@
+vault.crispy
+keyfile.dat
+backup/
+dist/
+build/
+*.spec
+__pycache__/
